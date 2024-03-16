@@ -1,6 +1,9 @@
 const http = require('http');
 
 const myEmitter = require('./logEvents');
+const { getAddresses } = require('./services/addresses.dal')
+// const { getAllFilmsForAllActors } = require('./services/films.dal')
+
 
 const port = 3000;
 
@@ -21,8 +24,23 @@ const server = http.createServer( async (request, response) => {
       response.end('Welcome to the DAL.');
       break;
 
+    case '/addresses':
+      let theAddresses = await getAddresses();
+      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.write(JSON.stringify(theAddresses));
+      response.end()
+      break;
+    default:
+      let message = `404 - Content Not Found.`;
+      if(DEBUG) console.log(message);
+      myEmitter.emit('event', request.url, 'ERROR', message);
+      response.writeHead(404, { 'Content-Type': 'text/plain' });
+      response.end('404 - Content Not Found.');
+      break;
+    }
 
-})
+
+});
 
 server.listen(port, () => {
     console.log(`Server running on port ${port}...`)
