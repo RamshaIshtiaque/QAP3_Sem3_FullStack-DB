@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Address</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="address-add content">
+        <h2>Add Address</h2>
+        <% if (successMessage) { %>
+            <p><%= successMessage %></p>
+        <% } %>
+        <form action="/addresses" method="POST">
+            <label for="address_line1">User ID:</label><br>
+            <input type="text" id="user_id" name="user_id" required><br>
+
+            <label for="address_line1">Address Line 1:</label><br>
+            <input type="text" id="address_line1" name="address_line1" required><br>
+
+            <label for="address_line2">Address Line 2:</label><br>
+            <input type="text" id="address_line2" name="address_line2" required><br>
+
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city" required><br>
+
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state" required><br>
+
+            <label for="postal_code">Postal Code:</label><br>
+            <input type="text" id="postal_code" name="postal_code" required><br>
+
+            <label for="country">Country:</label><br>
+            <input type="text" id="country" name="country" required><br>
+
+            <br>
+            <button type="submit">Add Address</button>
+        </form>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>

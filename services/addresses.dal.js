@@ -4,8 +4,7 @@ var getAddresses = function() {
   if(DEBUG) console.log("addresses.dal.getAddresses()");
   return new Promise(function(resolve, reject) {
 
-    const sql = "SELECT user_id, address_line1, address_line2 FROM user_addresses \
-                ORDER BY user_id DESC LIMIT 2;"
+    const sql = "SELECT user_id, address_line1, address_line2, city, state, postal_code, country FROM user_addresses ORDER BY user_id ASC;"
 
     dal.query(sql, [], (err, result) => {
       if (err) {
@@ -21,25 +20,24 @@ var getAddresses = function() {
 };
 
 var getAddressById = function(theId) {
-  if(DEBUG) console.log("addresses.dal.getAddressById()");
-  if(DEBUG) console.log(`the user id is: ${theId}`)
-  return new Promise(function(resolve, reject) {
-
-    const sql = "SELECT user_id, address_line1, address_line2 FROM user_addresses \
-      WHERE user_id = 3;"
-
-    dal.query(sql, [theId], (err, result) => {
-      if (err) {
-        if(DEBUG) console.log(err);
-        reject(err);
-      } else {
-        if(DEBUG) console.log("inside the addresses.dal.getAddressById() function");
-        if(DEBUG) console.log(result.rows);
-        resolve(result.rows);
-      }
+    if(DEBUG) console.log("addresses.dal.getAddressById()");
+    if(DEBUG) console.log(`the user id is: ${theId}`);
+    return new Promise(function(resolve, reject) {
+      const sql = "SELECT user_id, address_line1, address_line2 FROM user_addresses \
+        WHERE user_id = $1;"; // Using parameterized query
+  
+      dal.query(sql, [theId], (err, result) => {
+        if (err) {
+          if(DEBUG) console.log(err);
+          reject(err);
+        } else {
+          if(DEBUG) console.log("inside the addresses.dal.getAddressById() function");
+          if(DEBUG) console.log(result.rows);
+          resolve(result.rows);
+        }
+      }); 
     }); 
-  }); 
-};
+  };
 
 var addAddress = function(user_id, address_line1, address_line2, city, state, postal_code, country) {
     if (DEBUG) console.log("addresses.dal.addAddress()");
@@ -63,7 +61,7 @@ var addAddress = function(user_id, address_line1, address_line2, city, state, po
 var putAddress = function(id, user_id, address_line1, address_line2, city, state, postal_code, country) {
     if (DEBUG) console.log("addresses.dal.putAddress()");
     return new Promise(function(resolve, reject) {
-        const sql = "UPDATE user_addresses SET user_id=$2, address_line1=$3, address_line2=$4, city=$5, state=$6, postal_code=$7, country=$8 WHERE id=$1;";
+        const sql = "UPDATE user_addresses SET user_id=$2, address_line1=$3, address_line2=$4, city=$5, state=$6, postal_code=$7, country=$8 WHERE user_id=$1;";
         dal.query(sql, [id, user_id, address_line1, address_line2, city, state, postal_code, country], (err, result) => {
         if (err) {
             reject(err);

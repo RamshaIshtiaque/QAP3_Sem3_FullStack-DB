@@ -1,0 +1,21 @@
+<html lang="en">
+    <link rel="stylesheet" href="/styles.css">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="edit-address content">
+            <form action="/addresses/<%= locals.theId %>?_method=PATCH" method="POST">
+                <label>Edit Address Details:</br>
+                    <input type="text" name="address_line1" value="<%= locals.address_line1 %>" required>
+                    <input type="text" name="address_line2" value="<%= locals.address_line2 %>">
+                    <input type="text" name="city" value="<%= locals.city %>" required>
+                    <input type="text" name="state" value="<%= locals.state %>">
+                    <input type="text" name="postal_code" value="<%= locals.postal_code %>" required>
+                    <input type="text" name="country" value="<%= locals.country %>" required>
+                </label></br>
+                <button>PATCH</button>
+            </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
