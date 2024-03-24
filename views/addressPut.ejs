@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <%- include('./partials/head.ejs') %>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="replace-address content">
+        <form action="/addresses/<%= theId %>/replace" method="POST">
+            <label for="addressLine1">Address Line 1:</label>
+            <input type="text" id="address_line1" name="address_line1" value="<%= address_line1 %>" required><br><br>
+            
+            <label for="addressLine2">Address Line 2:</label>
+            <input type="text" id="address_line2" name="address_line2" value="<%= address_line2 %>"><br><br>
+            
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="<%= city %>"><br><br>
+            
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" value="<%= state %>"><br><br>
+            
+            <label for="postalCode">Postal Code:</label>
+            <input type="text" id="postal_code" name="postal_code" value="<%= postal_code %>"><br><br>
+            
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" value="<%= country %>"><br><br>
+            
+            <!-- Add other address fields as needed -->
+        
+            <input type="submit" value="Update Address">
+        </form>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>

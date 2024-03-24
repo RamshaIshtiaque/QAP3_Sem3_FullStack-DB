@@ -1,0 +1,41 @@
+<html lang="en">
+    <link rel="stylesheet" href="/styles.css">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="addresses content">
+            <h2>All Addresses:</h2> <!-- Display a heading for all addresses -->
+            <% if (addresses.length > 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Address Line 1</th>
+                            <th>Address Line 2</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Postal Code</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% addresses.forEach(address => { %>
+                            <tr>
+                                <td><%= address.user_id %></td> <!-- Display user ID -->
+                                <td><%= address.address_line1 %></td> <!-- Display address line 1 -->
+                                <td><%= address.address_line2 %></td> <!-- Display address line 2 -->
+                                <td><%= address.city %></td> <!-- Display city -->
+                                <td><%= address.state %></td> <!-- Display state -->
+                                <td><%= address.postal_code %></td> <!-- Display postal code -->
+                                <td><%= address.country %></td> <!-- Display country -->
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>No addresses found.</p> <!-- Display a message if no addresses are available -->
+            <% } %>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
