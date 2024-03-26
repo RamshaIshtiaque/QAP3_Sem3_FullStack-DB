@@ -1,6 +1,6 @@
 const express = require('express');
 const methodOverride = require('method-override');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, })); // This is important!
 app.use(methodOverride('_method')); // So is this!
-//app.use(bodyParser.urlencoded({ extended: true, })); // This is important!
+app.use(bodyParser.urlencoded({ extended: true, })); // This is important!
 
 
 app.get('/', async (req, res) => {
