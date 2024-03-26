@@ -9,11 +9,8 @@
     <%- include('./partials/nav.ejs') %>
     <div class="address-add content">
         <h2>Add Address</h2>
-        <% if (successMessage) { %>
-            <p><%= successMessage %></p>
-        <% } %>
         <form action="/addresses" method="POST">
-            <label for="address_line1">User ID:</label><br>
+            <label for="user_id">User ID:</label><br>
             <input type="text" id="user_id" name="user_id" required><br>
 
             <label for="address_line1">Address Line 1:</label><br>

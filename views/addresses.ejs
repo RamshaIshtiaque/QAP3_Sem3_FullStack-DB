@@ -28,6 +28,16 @@
                                 <td><%= address.state %></td> <!-- Display state -->
                                 <td><%= address.postal_code %></td> <!-- Display postal code -->
                                 <td><%= address.country %></td> <!-- Display country -->
+                                <td>
+                                    <form action="addresses/<%= address.user_id %>/delete-address" method="post">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="addresses/<%= address.user_id %>/update" method="get">
+                                        <button type="submit">Update</button>
+                                    </form>
+                                </td>
                             </tr>
                         <% }) %>
                     </tbody>

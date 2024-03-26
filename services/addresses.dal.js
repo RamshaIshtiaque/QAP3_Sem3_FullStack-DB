@@ -23,7 +23,7 @@ var getAddressById = function(theId) {
     if(DEBUG) console.log("addresses.dal.getAddressById()");
     if(DEBUG) console.log(`the user id is: ${theId}`);
     return new Promise(function(resolve, reject) {
-      const sql = "SELECT user_id, address_line1, address_line2 FROM user_addresses \
+      const sql = "SELECT user_id, address_line1, address_line2, city, state, postal_code, country  FROM user_addresses \
         WHERE user_id = $1;"; // Using parameterized query
   
       dal.query(sql, [theId], (err, result) => {
@@ -58,11 +58,11 @@ var addAddress = function(user_id, address_line1, address_line2, city, state, po
 };
   
 
-var putAddress = function(id, user_id, address_line1, address_line2, city, state, postal_code, country) {
+var putAddress = function(user_id, address_line1, address_line2, city, state, postal_code, country) {
     if (DEBUG) console.log("addresses.dal.putAddress()");
     return new Promise(function(resolve, reject) {
-        const sql = "UPDATE user_addresses SET user_id=$2, address_line1=$3, address_line2=$4, city=$5, state=$6, postal_code=$7, country=$8 WHERE user_id=$1;";
-        dal.query(sql, [id, user_id, address_line1, address_line2, city, state, postal_code, country], (err, result) => {
+        const sql = "UPDATE user_addresses SET address_line1=$2, address_line2=$3, city=$4, state=$5, postal_code=$6, country=$7 WHERE user_id=$1;";
+        dal.query(sql, [user_id, address_line1, address_line2, city, state, postal_code, country], (err, result) => {
         if (err) {
             reject(err);
             } else {
@@ -89,7 +89,7 @@ var patchAddress = function(id, user_id, address_line1, address_line2, city, sta
 var deleteAddress = function(id) {
     if (DEBUG) console.log("addresses.dal.deleteAddress()");
     return new Promise(function(resolve, reject) {
-        const sql = "DELETE FROM user_addresses WHERE id = $1;";
+        const sql = "DELETE FROM user_addresses WHERE user_id = $1;";
         dal.query(sql, [id], (err, result) => {
         if (err) {
             reject(err);

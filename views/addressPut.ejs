@@ -5,27 +5,26 @@
 </head>
 <body>
     <%- include('./partials/nav.ejs') %>
-    <div class="replace-address content">
-        <form action="/addresses/<%= theId %>/replace" method="POST">
-            <label for="addressLine1">Address Line 1:</label>
-            <input type="text" id="address_line1" name="address_line1" value="<%= address_line1 %>" required><br><br>
+    <div class="address content">
+        <form action="/addresses/<%=  address[0].user_id %>/update" method="POST">
+
+            <label for="address_line1">Address Line 1:</label>
+            <input type="text" id="address_line1" name="address_line1" value="<%= address[0].address_line1 %>" required><br><br>
             
-            <label for="addressLine2">Address Line 2:</label>
-            <input type="text" id="address_line2" name="address_line2" value="<%= address_line2 %>"><br><br>
+            <label for="address_line2">Address Line 2:</label>
+            <input type="text" id="address_line2" name="address_line2" value="<%= address[0].address_line2 %>" ><br><br>
             
             <label for="city">City:</label>
-            <input type="text" id="city" name="city" value="<%= city %>"><br><br>
+            <input type="text" id="city" name="city" value="<%= address[0].city %>" ><br><br>
             
             <label for="state">State:</label>
-            <input type="text" id="state" name="state" value="<%= state %>"><br><br>
+            <input type="text" id="state" name="state" value="<%= address[0].state %>" ><br><br>
             
-            <label for="postalCode">Postal Code:</label>
-            <input type="text" id="postal_code" name="postal_code" value="<%= postal_code %>"><br><br>
+            <label for="postal_code">Postal Code:</label>
+            <input type="text" id="postal_code" name="postal_code" value="<%= address[0].postal_code %>" ><br><br>
             
             <label for="country">Country:</label>
-            <input type="text" id="country" name="country" value="<%= country %>"><br><br>
-            
-            <!-- Add other address fields as needed -->
+            <input type="text" id="country" name="country" value="<%= address[0].country %>" ><br><br>
         
             <input type="submit" value="Update Address">
         </form>
